@@ -25,11 +25,12 @@ terraform apply
 
 ## Request via HTTP
 
-In the example below, `<alb_dns_name>` can be fetched from `terraform output`, 
- and the `<index>` is the index of the deployed lambda function.
+In the example below, `{proxy_commit_urls}` can be found from `terraform output`.
+
+Terraform provides `N` urls, and you can just do random access to them.
 
 ```http request
-POST http://<alb_dns_name>/v{index}/commit
+POST {proxy_commit_urls}
 Content-Type: application/json
 
 {
