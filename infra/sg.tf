@@ -1,5 +1,5 @@
 resource "aws_security_group" "lambda" {
-  name = "deeplx-sg"
+  name   = "deeplx-sg"
   vpc_id = module.vpc.vpc_id
 
   ingress {
