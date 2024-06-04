@@ -1,13 +1,14 @@
 resource "aws_lambda_layer_version" "this" {
   filename            = var.lambda_deps_archive_file
   source_code_hash    = filebase64sha256(var.lambda_deps_archive_file)
-  layer_name          = "deeplx-deps-${md5(var.lambda_deps_archive_file)}"
+  layer_name          = "${var.name}-deps-${md5(var.lambda_deps_archive_file)}"
   compatible_runtimes = ["python3.10"]
 }
 
 module "lambda" {
   source = "./lambda"
   count  = var.lambda_size
+  resource_name = var.name
 
   archive = var.lambda_archive_file
   index   = count.index

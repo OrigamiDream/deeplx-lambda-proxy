@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "this" {
-  function_name = "deeplx-${var.index}"
+  function_name = "${var.resource_name}-${var.index}"
   role          = aws_iam_role.this.arn
 
   handler          = "service/main.handler"

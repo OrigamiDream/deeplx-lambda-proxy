@@ -2,6 +2,10 @@ variable "index" {
   type = number
 }
 
+variable "resource_name" {
+  type = string
+}
+
 variable "archive" {
   type = string
 }

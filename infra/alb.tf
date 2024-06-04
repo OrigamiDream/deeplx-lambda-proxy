@@ -18,10 +18,10 @@ locals {
   }
   target_groups = {
     for i in range(var.lambda_size) : "lambda_${i}" => {
-      name                          = "deeplx-${i}-alb-tg"
+      name                          = "${var.name}-${i}-alb-tg"
       load_balancing_algorithm_type = "least_outstanding_requests"
       target_type                   = "lambda"
-      target_id                     = "arn:aws:lambda:${var.region}:${data.aws_caller_identity.this.account_id}:function:deeplx-${i}"
+      target_id                     = "arn:aws:lambda:${var.region}:${data.aws_caller_identity.this.account_id}:function:${var.name}-${i}"
       health_check = {
         protocol = "HTTP"
         path     = "/v${i}/health"
@@ -35,7 +35,7 @@ module "alb_sg" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 5.0"
 
-  name   = "deeplx-alb-sg"
+  name   = "${var.name}-alb-sg"
   vpc_id = module.vpc.vpc_id
 
   ingress_rules       = ["http-80-tcp", "https-443-tcp"]
@@ -49,7 +49,7 @@ module "alb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "~> 9.0"
 
-  name = "deeplx-alb"
+  name = "${var.name}-alb"
 
   load_balancer_type               = "application"
   enable_cross_zone_load_balancing = true

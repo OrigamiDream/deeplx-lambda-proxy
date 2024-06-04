@@ -1,7 +1,7 @@
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = "deeplx-vpc"
+  name = "${var.name}-vpc"
   cidr = "10.30.0.0/16"
 
   azs             = ["${var.region}a", "${var.region}b"]

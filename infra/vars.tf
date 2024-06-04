@@ -4,6 +4,12 @@ variable "region" {
   description = "Name of AWS region"
 }
 
+variable "name" {
+  type = string
+  default = "deeplx"
+  description = "Base name of AWS resources"
+}
+
 variable "lambda_archive_file" {
   type    = string
   default = "../lambda.zip"

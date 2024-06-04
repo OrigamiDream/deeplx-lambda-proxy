@@ -11,7 +11,7 @@ data "aws_iam_policy_document" "this" {
 }
 
 resource "aws_iam_role" "this" {
-  name               = "deeplx-${var.index}-role"
+  name               = "${var.resource_name}-${var.index}-role"
   assume_role_policy = data.aws_iam_policy_document.this.json
 }
 
